@@ -47,15 +47,10 @@ payload = {
 "name": level
 }
 },
-"풀이 날짜": {
-"date": {
-"start": str(date.today())
-}
-},
 "GitHub": {
 "url": github_url
 },
-"재풀이 필요": {
+"재풀이": {
 "checkbox": False
 },
 "메모": {
