@@ -20,11 +20,15 @@ jobs:
           echo "=== Changed Files ==="
           git diff --name-only HEAD~1 HEAD || true
 
-          FILE=$(git diff --name-only HEAD~1 HEAD | grep '^programmers/' | head -n 1)
+          echo "=== Detected programmers files ==="
+          git diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
 
-          echo "Detected FILE=$FILE"
-
-          echo "FILE_PATH=$FILE" >> $GITHUB_ENV
+          # 변경된 programmers 파일을 모두(줄바꿈 구분) 환경변수로 전달
+          {
+            echo "FILE_PATHS<<EOF"
+            git diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
+            echo "EOF"
+          } >> "$GITHUB_ENV"
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -38,5 +42,5 @@ jobs:
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-          FILE_PATH: ${{ env.FILE_PATH }}
+          FILE_PATHS: ${{ env.FILE_PATHS }}
         run: python scripts/notion_sync.py
