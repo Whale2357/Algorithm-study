@@ -5,7 +5,7 @@ from datetime import date
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
 DATABASE_ID = os.environ["NOTION_DATABASE_ID"]
 
-FILE_PATH = os.environ["FILE_PATH"]
+FILE_PATH = "programmers/lv2/최대값과 최소값.java"
 
 parts = FILE_PATH.split("/")
 
