@@ -1,0 +1,36 @@
+name: Notion Sync
+
+on:
+push:
+branches:
+- main
+
+jobs:
+sync:
+runs-on: ubuntu-latest
+
+```
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
+
+  - name: Get changed files
+    id: files
+    run: |
+      echo "FILE_PATH=$(git diff --name-only HEAD~1 HEAD | grep '^programmers/' | head -n 1)" >> $GITHUB_ENV
+
+  - name: Setup Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.12"
+
+  - name: Install requests
+    run: pip install requests
+
+  - name: Run Notion Sync
+    env:
+      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+      FILE_PATH: ${{ env.FILE_PATH }}
+    run: python scripts/notion_sync.py
+```
