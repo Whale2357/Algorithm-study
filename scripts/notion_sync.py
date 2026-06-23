@@ -70,13 +70,12 @@ headers=headers,
 json=payload
 )
 
-res = requests.get(
-    f"https://api.notion.com/v1/databases/{DATABASE_ID}",
-    headers=headers
-)
-
-print(res.status_code)
-print(res.text)
-
 print(response.status_code)
 print(response.text)
+
+FILE_PATH = os.environ.get("FILE_PATH", "")
+
+print("FILE_PATH =", repr(FILE_PATH))
+
+parts = FILE_PATH.split("/")
+print("parts =", parts)
