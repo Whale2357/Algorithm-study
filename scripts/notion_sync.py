@@ -5,7 +5,10 @@ from datetime import date
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
 DATABASE_ID = os.environ["NOTION_DATABASE_ID"]
 
-FILE_PATH = os.environ["FILE_PATH"]
+FILE_PATH = os.environ.get("FILE_PATH", "")
+
+if not FILE_PATH:
+    raise Exception("FILE_PATH is empty")
 
 parts = FILE_PATH.split("/")
 

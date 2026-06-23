@@ -16,9 +16,15 @@ jobs:
           fetch-depth: 2
 
       - name: Get changed files
-        id: files
         run: |
-          echo "FILE_PATH=$(git diff --name-only HEAD~1 HEAD | grep '^programmers/' | head -n 1)" >> $GITHUB_ENV
+          echo "=== Changed Files ==="
+          git diff --name-only HEAD~1 HEAD || true
+
+          FILE=$(git diff --name-only HEAD~1 HEAD | grep '^programmers/' | head -n 1)
+
+          echo "Detected FILE=$FILE"
+
+          echo "FILE_PATH=$FILE" >> $GITHUB_ENV
 
       - name: Setup Python
         uses: actions/setup-python@v5
