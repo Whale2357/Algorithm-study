@@ -12,7 +12,7 @@ class Solution {
                     sb.append(Character.toUpperCase(c));
                     isNextUpper = false;
                 } else {
-                    // 문제 조건에 따라 나머지 글자를 소문자로 바꿔야 한다면 toLowerCase() 사용
+                    //나머지 글자를 소문자로 toLowerCase() 사용
                     sb.append(Character.toLowerCase(c)); 
                 }
             }

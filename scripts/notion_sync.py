@@ -5,11 +5,11 @@ from datetime import date
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
 DATABASE_ID = os.environ["NOTION_DATABASE_ID"]
 
-FILE_PATH = "programmers/lv2/최대값과 최소값.java"
+FILE_PATH = os.environ["FILE_PATH"]
 
 parts = FILE_PATH.split("/")
 
-level = parts[1].upper()
+level = parts[1].capitalize()
 filename = parts[-1]
 
 problem_name = os.path.splitext(filename)[0]
