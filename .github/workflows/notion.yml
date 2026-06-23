@@ -17,16 +17,17 @@ jobs:
 
       - name: Get changed files
         run: |
+          # core.quotePath=false : 한글 등 비ASCII 파일명이 따옴표/이스케이프 없이 그대로 출력되게 함
           echo "=== Changed Files ==="
-          git diff --name-only HEAD~1 HEAD || true
+          git -c core.quotePath=false diff --name-only HEAD~1 HEAD || true
 
           echo "=== Detected programmers files ==="
-          git diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
+          git -c core.quotePath=false diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
 
           # 변경된 programmers 파일을 모두(줄바꿈 구분) 환경변수로 전달
           {
             echo "FILE_PATHS<<EOF"
-            git diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
+            git -c core.quotePath=false diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
             echo "EOF"
           } >> "$GITHUB_ENV"
 
