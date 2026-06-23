@@ -47,6 +47,11 @@ payload = {
 "name": level
 }
 },
+"풀이 날짜": {
+"date": {
+"start": str(date.today())
+}
+},
 "GitHub": {
 "url": github_url
 },
@@ -64,6 +69,14 @@ response = requests.post(
 headers=headers,
 json=payload
 )
+
+res = requests.get(
+    f"https://api.notion.com/v1/databases/{DATABASE_ID}",
+    headers=headers
+)
+
+print(res.status_code)
+print(res.text)
 
 print(response.status_code)
 print(response.text)
