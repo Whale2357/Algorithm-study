@@ -48,6 +48,7 @@ def build_payload(file_path):
             "GitHub": {"url": github_url},
             "재풀이": {"checkbox": False},
             "메모": {"rich_text": []},
+            "키워드": {"rich_text": []},
         },
     }
 
