@@ -93,7 +93,8 @@ Notion에 기록되는 속성(Property):
 | 풀이 날짜 (Date) | 동기화된 날짜 |
 | GitHub (URL) | 해당 파일의 GitHub 링크 |
 | 재풀이 (Checkbox) | 기본값 `false` |
-| 메모 / 키워드 (Memo / Keyword) | 직접 작성용 빈 필드 |
+| 메모 (Memo) | 직접 작성용 빈 필드 |
+| 키워드 (Keyword) | 직접 작성용 빈 필드 |
 
 ### 설정 (Setup)
 

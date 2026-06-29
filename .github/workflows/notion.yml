@@ -13,21 +13,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          # push에 포함된 모든 커밋의 변경을 비교하려면 전체 히스토리가 필요하다.
+          fetch-depth: 0
 
       - name: Get changed files
+        env:
+          # push 이벤트의 시작(before) / 끝(after) 커밋 SHA
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
         run: |
+          # 새 브랜치 첫 푸시 등으로 before가 0...0 이면 마지막 커밋만 비교한다.
+          ZERO="0000000000000000000000000000000000000000"
+          if [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "$ZERO" ]; then
+            RANGE_START="${AFTER_SHA}~1"
+          else
+            RANGE_START="$BEFORE_SHA"
+          fi
+
           # core.quotePath=false : 한글 등 비ASCII 파일명이 따옴표/이스케이프 없이 그대로 출력되게 함
-          echo "=== Changed Files ==="
-          git -c core.quotePath=false diff --name-only HEAD~1 HEAD || true
+          echo "=== Range: $RANGE_START..$AFTER_SHA ==="
+          git -c core.quotePath=false diff --name-only "$RANGE_START" "$AFTER_SHA" || true
 
           echo "=== Detected programmers files ==="
-          git -c core.quotePath=false diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
+          git -c core.quotePath=false diff --name-only "$RANGE_START" "$AFTER_SHA" | grep '^programmers/' || true
 
-          # 변경된 programmers 파일을 모두(줄바꿈 구분) 환경변수로 전달
+          # 변경된 programmers 파일을 모두(줄바꿈 구분, 중복 제거) 환경변수로 전달
           {
             echo "FILE_PATHS<<EOF"
-            git -c core.quotePath=false diff --name-only HEAD~1 HEAD | grep '^programmers/' || true
+            git -c core.quotePath=false diff --name-only "$RANGE_START" "$AFTER_SHA" | grep '^programmers/' | sort -u || true
             echo "EOF"
           } >> "$GITHUB_ENV"
 
