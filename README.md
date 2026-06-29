@@ -8,7 +8,7 @@
 
 ## 진행 현황 / Progress
 
-> 아래 표는 커밋(Commit) 시 pre-commit 훅(Hook)이 자동으로 갱신합니다. (직접 수정하지 마세요)
+> 아래 표는 `main` 브랜치 푸시(push) 시 GitHub Actions가 자동으로 갱신합니다. (직접 수정하지 마세요)
 
 <!-- PROGRESS:START -->
 | 난이도 (Level) | 푼 문제 수 (Solved) |
@@ -30,19 +30,11 @@ algorithm-study/
 ├─ scripts/
 │  ├─ notion_sync.py      # Notion 동기화(Sync) 스크립트
 │  └─ update_progress.py  # 진행 현황 표 갱신 스크립트
-├─ .githooks/
-│  └─ pre-commit          # 커밋 시 진행 현황 자동 갱신 훅(Hook)
 ├─ .github/workflows/
-│  └─ notion.yml          # 자동 동기화 워크플로(Workflow)
+│  ├─ notion.yml          # Notion 자동 동기화 워크플로(Workflow)
+│  └─ progress.yml        # 진행 현황 자동 갱신 워크플로(Workflow)
 └─ README.md
 ```
-
-> **훅 활성화 (Hook setup)**: 저장소를 새로 클론(Clone)한 경우, 진행 현황 자동 갱신을 쓰려면 한 번만 아래를 실행하세요.
-> (`core.hooksPath` 설정은 클론 시 따라오지 않습니다.)
->
-> ```bash
-> git config core.hooksPath .githooks
-> ```
 
 ---
 
