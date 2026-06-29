@@ -1,6 +1,6 @@
 # Algorithm-study
 
-코딩 테스트(Coding Test)와 알고리즘 학습을 위해 직접 푼 문제들을 정리하는 개인 저장소입니다.
+알고리즘 학습을 위해 직접 푼 문제들을 정리하는 개인 저장소입니다.
 주로 [프로그래머스(Programmers)](https://programmers.co.kr/) 문제를 **Java**로 풀이하며,
 `main` 브랜치에 풀이를 푸시(push)하면 GitHub Actions가 자동으로 Notion 데이터베이스(Database)에 기록을 남깁니다.
 
@@ -8,14 +8,14 @@
 
 ## 진행 현황 / Progress
 
-> 아래 표는 GitHub Actions가 자동으로 갱신합니다. (직접 수정하지 마세요)
+> 아래 표는 커밋(Commit) 시 pre-commit 훅(Hook)이 자동으로 갱신합니다. (직접 수정하지 마세요)
 
 <!-- PROGRESS:START -->
 | 난이도 (Level) | 푼 문제 수 (Solved) |
 | --- | --- |
 | Lv2 | 4 |
-| Lv3 | 2 |
-| **합계 (Total)** | **6** |
+| Lv3 | 3 |
+| **합계 (Total)** | **7** |
 <!-- PROGRESS:END -->
 
 ---
@@ -28,11 +28,21 @@ algorithm-study/
 │  ├─ lv2/                # 프로그래머스 Level 2 풀이
 │  └─ lv3/                # 프로그래머스 Level 3 풀이
 ├─ scripts/
-│  └─ notion_sync.py      # Notion 동기화(Sync) 스크립트
+│  ├─ notion_sync.py      # Notion 동기화(Sync) 스크립트
+│  └─ update_progress.py  # 진행 현황 표 갱신 스크립트
+├─ .githooks/
+│  └─ pre-commit          # 커밋 시 진행 현황 자동 갱신 훅(Hook)
 ├─ .github/workflows/
 │  └─ notion.yml          # 자동 동기화 워크플로(Workflow)
 └─ README.md
 ```
+
+> **훅 활성화 (Hook setup)**: 저장소를 새로 클론(Clone)한 경우, 진행 현황 자동 갱신을 쓰려면 한 번만 아래를 실행하세요.
+> (`core.hooksPath` 설정은 클론 시 따라오지 않습니다.)
+>
+> ```bash
+> git config core.hooksPath .githooks
+> ```
 
 ---
 
@@ -83,8 +93,7 @@ Notion에 기록되는 속성(Property):
 | 풀이 날짜 (Date) | 동기화된 날짜 |
 | GitHub (URL) | 해당 파일의 GitHub 링크 |
 | 재풀이 (Checkbox) | 기본값 `false` |
-| 메모 (Memo) | 직접 작성용 빈 필드 |
-| 키워드 (Keyword) | 직접 작성용 빈 필드 |
+| 메모 / 키워드 (Memo / Keyword) | 직접 작성용 빈 필드 |
 
 ### 설정 (Setup)
 
