@@ -64,6 +64,32 @@ javac "programmers/lv3/네트워크.java"
 
 ---
 
+## 커밋 & 푸시 (Commit & Push)
+
+풀이 파일을 추가/수정한 뒤 아래 순서로 커밋(Commit)하고 푸시(Push)합니다.
+
+```bash
+git add .
+git commit -m "solve: 문제이름"
+git push
+```
+
+푸시가 끝나면 GitHub Actions가 자동으로 실행됩니다.
+
+- **Notion Sync**: 변경된 풀이를 Notion 데이터베이스에 등록
+- **Update Progress**: 위 [진행 현황](#진행-현황--progress) 표를 갱신하고 `chore: 진행 현황 자동 갱신` 커밋을 자동 추가
+
+> **중요**: Update Progress 워크플로가 원격(remote)에 커밋을 하나 더 추가하므로,
+> 다음 작업 전에 반드시 원격 변경을 받아와야 다음 push가 거부(rejected)되지 않습니다.
+>
+> ```bash
+> git pull --rebase
+> ```
+>
+> 만약 `! [rejected] ... (fetch first)` 오류가 나면, 위 명령으로 원격 커밋을 받아온 뒤 다시 `git push` 하면 됩니다.
+
+---
+
 ## Notion 자동 연동 (Auto-Sync)
 
 `main` 브랜치에 `programmers/` 하위 파일이 변경되어 푸시되면,
